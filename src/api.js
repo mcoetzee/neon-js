@@ -25,7 +25,7 @@ export const getRPCEndpoint = (net) => {
   });
 };
 
-// wrapper for querying node RPC
+// wrapper for querying node RPC on MainNet or TestNet
 const queryRPC = (net, method, params, id = 1) => {
   let jsonRequest = axios.create({
     headers: {"Content-Type": "application/json"}
@@ -105,18 +105,6 @@ export const getWalletDBHeight = (net) => {
 
 // RPC methods
 
-// wrapper for querying node RPC on MainNet or TestNet
-const queryRPC = (net, method, params, id = 1) => {
-  let jsonRequest = axios.create({
-    headers: {"Content-Type": "application/json"}
-  });
-  const jsonRpcData = {"jsonrpc": "2.0", "method": method, "params": params, "id": id};
-  return getRPCEndpoint(net).then((rpcEndpoint) => {
-    return jsonRequest.post(rpcEndpoint, jsonRpcData).then((response) => {
-      return response.data;
-    });
-  });
-};
 
 // get a block from the RPC
 export const getBlockByIndex = (net, block) => {
